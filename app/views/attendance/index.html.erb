@@ -1,2 +1,26 @@
-<h1>Attendance#index</h1>
-<p>Find me in app/views/attendance/index.html.erb</p>
+<h1><%= @timeslot.date_s %></h1>
+
+<div data-role="navbar">
+  <ul>
+	 <li><a href="<%= link_to_period(@timeslot.previous) %>"><%= @timeslot.previous.hour_s %></a></li>
+	 <li><a href="" class="ui-btn-active"><%= @timeslot.hour_s %></a></li>
+	 <li><a href="<%= link_to_period(@timeslot.next) %>"><%= @timeslot.next.hour_s %></a></li>
+  </ul>
+</div>
+
+<ul data-role="listview" data-filter="true">
+  <% @students.each do |student| %>
+  <li class="student-entry">
+	 <%= student.name %> (<%= student.student_id %>)
+	 <fieldset class="attendance-indicator" data-role="controlgroup" data-type="horizontal">
+		<label>Attending
+		  <input type="checkbox" class="attendance-toggle"
+					data-student-id="<%= student.id %>"
+					data-start-time="<%= @timeslot.start_time %>"
+					data-end-time="<%= @timeslot.end_time %>"
+					<% unless student.record_at(@timeslot).nil? %>checked<% end %>>
+		</label>
+	 </fieldset>
+  </li>
+  <% end %>
+</ul>

@@ -2,6 +2,7 @@ Attendance::Application.routes.draw do
   root 'attendance#index'
 
   get 'attendance' => 'attendance#index'
+  get ':date/:timeslot' => 'attendance#index'
   post 'attendance' => 'attendance#update'
 
   # The priority is based upon order of creation: first created -> highest priority.
