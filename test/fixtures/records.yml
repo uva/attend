@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start: 2013-09-01 12:18:03
+  end: 2013-09-01 12:18:03
+  student_id: 
+
+two:
+  start: 2013-09-01 12:18:03
+  end: 2013-09-01 12:18:03
+  student_id: 
