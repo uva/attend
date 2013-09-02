@@ -27,3 +27,7 @@ Attendance::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 end
+
+CASClient::Frameworks::Rails::Filter.configure(
+  :cas_base_url => "https://bt-lap.ic.uva.nl/cas/"
+)

@@ -78,3 +78,8 @@ Attendance::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end
+
+CASClient::Frameworks::Rails::Filter.configure(
+  :cas_base_url => "https://secure.uva.nl/cas/"
+)
+

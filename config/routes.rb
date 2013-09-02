@@ -1,9 +1,14 @@
 Attendance::Application.routes.draw do
+  resources :users
+
   root 'attendance#index'
+
+  get 'unauthorized' => 'attendance#unauthorized'
 
   get 'attendance' => 'attendance#index'
   get ':date/:timeslot' => 'attendance#index'
   post 'attendance' => 'attendance#update'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

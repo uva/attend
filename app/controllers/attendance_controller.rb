@@ -1,4 +1,11 @@
 class AttendanceController < ApplicationController
+
+  prepend_before_filter CASClient::Frameworks::Rails::Filter
+  before_filter :is_authorized?, :except => [:unauthorized]
+
+  def unauthorized
+  end
+
   def index
     if params[:date] and params[:timeslot]
       date = Time.parse(params[:date]) # not DateTime.parse which always returns in UTC
