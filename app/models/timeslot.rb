@@ -1,17 +1,31 @@
 class Timeslot
   attr_reader :start_time, :end_time
 
+  @@START_HOUR_OF_THE_DAY = 9   # first hour of the day
+  @@END_HOUR_OF_THE_DAY = 17    # last hour of the day
+  @@PERIOD_LENGTH = 2.hours
+
   def initialize(start_datetime, end_datetime)
     @start_time = start_datetime
     @end_time = end_datetime
   end
 
   def previous
-    Timeslot.new(@start_time.change(hour: @start_time.hour - 2), @end_time.change(hour: @end_time.hour - 2))
+    new_start = @start_time - @@PERIOD_LENGTH
+    if new_start.hour < @@START_HOUR_OF_THE_DAY
+      new_start = new_start.change(hour: @@END_HOUR_OF_THE_DAY) - @@PERIOD_LENGTH - 1.day
+    end
+    new_end = new_start + @@PERIOD_LENGTH
+    Timeslot.new(new_start, new_end)
   end
 
   def next
-    Timeslot.new(@start_time.change(hour: @start_time.hour + 2), @end_time.change(hour: @end_time.hour + 2))
+    new_end = @end_time + @@PERIOD_LENGTH
+    if new_end.hour > @@END_HOUR_OF_THE_DAY
+      new_end = new_end.change(hour: @@START_HOUR_OF_THE_DAY) + @@PERIOD_LENGTH + 1.day
+    end
+    new_start = new_end - @@PERIOD_LENGTH
+    Timeslot.new(new_start, new_end)
   end
 
   def hour_s
@@ -37,5 +51,13 @@ class Timeslot
   def self.parse(string, date = DateTime.now)
     slots = string.scan(/^(\d{1,2})-(\d{1,2})$/)
     Timeslot.new(date.change(hour: slots[0][0].to_i), date.change(hour: slots[0][1].to_i))
+  end
+
+  def self.start_of_day(date)
+    date.change(hour: @@START_HOUR_OF_THE_DAY)
+  end
+
+  def self.end_of_day(date)
+    date.change(hour: @@END_HOUR_OF_THE_DAY)
   end
 end
