@@ -1,11 +1,7 @@
-<h1><%= @timeslot.date_s %></h1>
-
-<div data-role="navbar">
-  <ul>
-	 <li><a href="<%= link_to_period(@timeslot.previous) %>"><%= @timeslot.previous.hour_s %></a></li>
-	 <li><a href="" class="ui-btn-active"><%= @timeslot.hour_s %></a></li>
-	 <li><a href="<%= link_to_period(@timeslot.next) %>"><%= @timeslot.next.hour_s %></a></li>
-  </ul>
+<div data-role="header">
+  <a href="<%= link_to_period(@timeslot.previous) %>" data-role="button" data-icon="arrow-l">Next</a>
+  <h1><%= @timeslot.hour_s %> <%= @timeslot.date_s %></h1>
+  <a href="<%= link_to_period(@timeslot.next) %>" data-role="button" data-icon="arrow-r">Next</a>
 </div>
 
 <ul data-role="listview" data-filter="true">
