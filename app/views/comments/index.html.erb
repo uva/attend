@@ -1,0 +1,13 @@
+<div data-role="page">
+  <h1><%= @student.name %> (<%= @student.student_id %>)</h1>
+
+  <% @comments.each do |comment| %>
+  <ul data-role="listview">
+	 <li>
+		<h2><%= comment.author.uvanetid %></h2>
+		<div class="ui-li-aside"><strong><%= comment.created_at %></strong></div>
+		<p><%= comment.body %></p>
+	 </li>
+  </ul>
+  <% end %>
+</div>

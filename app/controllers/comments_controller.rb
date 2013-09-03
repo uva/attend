@@ -24,6 +24,11 @@ class CommentsController < ApplicationController
       end
     end
   end
+  
+  def index
+    @student = current_student
+    @comments = current_student.comments.includes(:author)
+  end
 
   def show
   end
@@ -39,7 +44,7 @@ class CommentsController < ApplicationController
 
   private
     def current_student
-      @student = Student.find_by(params[:student_id])
+      Student.find_by(id: params[:student_id])
     end
 
     def comment_params

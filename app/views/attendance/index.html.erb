@@ -11,25 +11,30 @@
 </div>
 
 <div data-role="content">
-<ul data-role="listview" data-filter="true" data-inset="true">
-  <% @students.each do |student| %>
-  <li class="student-entry" data-filtertext="<%= student.id %> <%= student.name %>">
-	 <%= student.name %> (<%= student.student_id %>)
-	 <div class="attendance-indicator">
-		<fieldset data-role="controlgroup" data-type="horizontal">
-		  <label>Attending
-			 <input type="checkbox" class="attendance-toggle"
-					  data-student-id="<%= student.id %>"
-					  data-start-time="<%= @timeslot.start_time %>"
-					  data-end-time="<%= @timeslot.end_time %>"
-					  <% unless student.record_at(@timeslot).nil? %>checked<% end %>>
-		  </label>
-		</fieldset>
-		<fieldset data-role="controlgroup" data-type="horizontal">
-		  <a href="<%= url_for new_student_comment_path(student) %>" data-role="button" data-inline="true" data-rel="dialog">Add Comment</a>
-		</fieldset>
-	 </div>
-  </li>
-  <% end %>
-</ul>
+  <ul data-role="listview" data-filter="true" data-inset="true">
+	 <% @students.each do |student| %>
+	 <li class="student-entry" data-filtertext="<%= student.id %> <%= student.name %>">
+		<%= student.name %> (<%= student.student_id %>)
+		<div class="ui-li-aside attendance-indicator">
+		  <fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
+			 <label>Attending
+				<input type="checkbox" class="attendance-toggle"
+						 data-student-id="<%= student.id %>"
+						 data-start-time="<%= @timeslot.start_time %>"
+						 data-end-time="<%= @timeslot.end_time %>"
+						 data-inline="true"
+						 <% unless student.record_at(@timeslot).nil? %>checked<% end %>>
+			 </label>
+		  </fieldset>
+		  <fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
+			 <a href="<%= url_for new_student_comment_path(student) %>"
+				 data-role="button"
+				 data-inline="true"
+				 data-rel="dialog"
+				 >Add Comment</a>
+		  </fieldset>
+		</div>
+	 </li>
+	 <% end %>
+  </ul>
 </div>

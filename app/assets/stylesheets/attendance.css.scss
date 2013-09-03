@@ -4,19 +4,19 @@
 
 .student-entry
 {
-	 height: 2em;
-	 line-height: 2em;
+	 height: 2.3em;
+	 line-height: 2.3em;
 }
 
 .attendance-indicator
 {
 	 position: absolute;			  /* ugly, but can't get it to work as relative */
-	 top: 0px;
-	 right: 3px;
+	 top: 0;
+	 right: 4px;
 	 line-height: 100%;
 
 	 fieldset
 	 {
-		  display: inline-block;
+	 	  display: inline-block;
 	 }
 }
