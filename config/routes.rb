@@ -1,9 +1,14 @@
 Attendance::Application.routes.draw do
-  resources :users
 
   root 'attendance#index'
 
   get 'unauthorized' => 'attendance#unauthorized'
+ 
+  resources :students do
+    resources :comments, except: [:index]
+  end
+
+  resources :users
 
   get 'attendance' => 'attendance#index'
   get ':date/:timeslot' => 'attendance#index'

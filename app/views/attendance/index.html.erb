@@ -1,22 +1,35 @@
+<% if flash[:notice] %>
+<div class="ui-bar ui-bar-b"><%= flash[:notice] %></div>
+<% end %>
+
 <div data-role="header">
-  <a href="<%= link_to_period(@timeslot.previous) %>" data-role="button" data-icon="arrow-l">Next</a>
+  <a href="<%= link_to_period(@timeslot.previous) %>"
+	  data-role="button" data-icon="arrow-l">Previous</a>
   <h1><%= @timeslot.hour_s %> <%= @timeslot.date_s %></h1>
-  <a href="<%= link_to_period(@timeslot.next) %>" data-role="button" data-icon="arrow-r">Next</a>
+  <a href="<%= link_to_period(@timeslot.next) %>"
+	  data-role="button" data-icon="arrow-r">Next</a>
 </div>
 
-<ul data-role="listview" data-filter="true">
+<div data-role="content">
+<ul data-role="listview" data-filter="true" data-inset="true">
   <% @students.each do |student| %>
-  <li class="student-entry">
+  <li class="student-entry" data-filtertext="<%= student.id %> <%= student.name %>">
 	 <%= student.name %> (<%= student.student_id %>)
-	 <fieldset class="attendance-indicator" data-role="controlgroup" data-type="horizontal">
-		<label>Attending
-		  <input type="checkbox" class="attendance-toggle"
-					data-student-id="<%= student.id %>"
-					data-start-time="<%= @timeslot.start_time %>"
-					data-end-time="<%= @timeslot.end_time %>"
-					<% unless student.record_at(@timeslot).nil? %>checked<% end %>>
-		</label>
-	 </fieldset>
+	 <div class="attendance-indicator">
+		<fieldset data-role="controlgroup" data-type="horizontal">
+		  <label>Attending
+			 <input type="checkbox" class="attendance-toggle"
+					  data-student-id="<%= student.id %>"
+					  data-start-time="<%= @timeslot.start_time %>"
+					  data-end-time="<%= @timeslot.end_time %>"
+					  <% unless student.record_at(@timeslot).nil? %>checked<% end %>>
+		  </label>
+		</fieldset>
+		<fieldset data-role="controlgroup" data-type="horizontal">
+		  <a href="<%= url_for new_student_comment_path(student) %>" data-role="button" data-inline="true" data-rel="dialog">Add Comment</a>
+		</fieldset>
+	 </div>
   </li>
   <% end %>
 </ul>
+</div>

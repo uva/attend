@@ -10,9 +10,13 @@
 
 .attendance-indicator
 {
-	 position: absolute;
-	 display: inline-block;
-	 top: 0;
-	 right: 0;
+	 position: absolute;			  /* ugly, but can't get it to work as relative */
+	 top: 0px;
+	 right: 3px;
 	 line-height: 100%;
+
+	 fieldset
+	 {
+		  display: inline-block;
+	 }
 }
