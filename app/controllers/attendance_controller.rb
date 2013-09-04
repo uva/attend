@@ -1,10 +1,7 @@
 class AttendanceController < ApplicationController
 
   prepend_before_filter CASClient::Frameworks::Rails::Filter
-  before_filter :is_authorized?, :except => [:unauthorized]
-
-  def unauthorized
-  end
+  before_filter :is_assistant?
 
   def index
     if params[:date] and params[:timeslot]

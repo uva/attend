@@ -1,11 +1,12 @@
 Attendance::Application.routes.draw do
 
+  get "students/show"
   root 'attendance#index'
 
-  get 'unauthorized' => 'attendance#unauthorized'
+  get 'unauthorized' => 'users#unauthorized', as: 'unauthorized'
 
   resources :students do
-    resources :comments
+    resources :comments, only: [:index, :new, :create]
   end
 
   resources :users

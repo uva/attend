@@ -7,15 +7,15 @@ class ApplicationController < ActionController::Base
     return User.find_by(uvanetid: session[:cas_user])
   end
 
-  def is_authorized?
+  def is_assistant?
     if current_user.nil?
-      redirect_to action: 'unauthorized'
+      redirect_to controller: 'users', action: 'unauthorized'
     end
   end
 
   def is_admin?
     if current_user.nil? || !current_user.is_admin?
-      redirect_to controller: 'attendance', action: 'unauthorized'
+      redirect_to controller: 'users', action: 'unauthorized'
     end
   end
 end

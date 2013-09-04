@@ -1,11 +1,11 @@
 class CommentsController < ApplicationController
+  before_action :set_student, only: [:create, :new, :index]
 
   prepend_before_filter CASClient::Frameworks::Rails::Filter
-  before_filter :is_authorized?
+  before_filter :is_assistant?
 
   def new
     @comment = Comment.new
-    @student = current_student
   end
 
   def create
@@ -26,28 +26,15 @@ class CommentsController < ApplicationController
   end
   
   def index
-    @student = current_student
-    @comments = current_student.comments.includes(:author)
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
+    @comments = @student.comments.includes(:author)
   end
 
   private
-    def current_student
-      Student.find_by(id: params[:student_id])
+    def set_student
+      @student = Student.find_by(id: params[:student_id])
     end
 
     def comment_params
-      params[:comment].permit(:body).merge(student_id: current_student.id, author_id: current_user.id)
+      params[:comment].permit(:body).merge(student_id: @student.id, author_id: current_user.id)
     end
 end

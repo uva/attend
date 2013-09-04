@@ -1,0 +1,20 @@
+<section>
+  <header><h2>Attendance</h2></header>
+  
+  <table data-role="table">
+	 <thead>
+		<tr>
+		  <th>Week</th>
+		  <th>Hours</th>
+		</tr>
+	 </thead>
+	 <tbody>
+		<% @hours_per_week.each do |week, hours| %>
+		<tr>
+		  <td><%= week %></td>
+		  <td><%= hours %></td>
+		</tr>
+		<% end %>
+	 </tbody>
+  </table>
+</section>

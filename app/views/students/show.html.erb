@@ -1,0 +1,11 @@
+<section data-role="page">
+  <header data-role="header">
+	 <h1><%= @student.name %> (<%= @student.student_id %>)</h1>
+  </header>
+
+  <section data-role="content">
+	 <%= render 'attendance' %>
+
+	 <%= render 'comments' %>
+  </section>
+</section>
