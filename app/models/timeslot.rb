@@ -1,6 +1,5 @@
 class Timeslot
   attr_reader :start_time, :end_time
-  attr_reader :PERIOD_LENGTH
 
   @@START_HOUR_OF_THE_DAY = 9   # first hour of the day
   @@END_HOUR_OF_THE_DAY = 17    # last hour of the day
@@ -35,6 +34,10 @@ class Timeslot
 
   def date_s
     @start_time.strftime('%A, %d %B %Y')
+  end
+
+  def self.PERIOD_LENGTH
+    @@PERIOD_LENGTH
   end
 
   def self.now
