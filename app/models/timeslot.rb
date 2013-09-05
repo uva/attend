@@ -1,9 +1,12 @@
 class Timeslot
   attr_reader :start_time, :end_time
 
-  @@START_HOUR_OF_THE_DAY = 9   # first hour of the day
-  @@END_HOUR_OF_THE_DAY = 17    # last hour of the day
-  @@PERIOD_LENGTH = 2.hours
+  SATURDAY = 6
+  SUNDAY = 0
+
+  START_HOUR_OF_THE_DAY = 9   # first hour of the day
+  END_HOUR_OF_THE_DAY = 19    # last hour of the day
+  PERIOD_LENGTH = 2.hours
 
   def initialize(start_datetime, end_datetime)
     @start_time = start_datetime
@@ -11,25 +14,29 @@ class Timeslot
   end
 
   def previous
-    new_start = @start_time - @@PERIOD_LENGTH
-    if new_start.hour < @@START_HOUR_OF_THE_DAY
-      new_start = new_start.change(hour: @@END_HOUR_OF_THE_DAY) - @@PERIOD_LENGTH - 1.day
+    new_start = @start_time - PERIOD_LENGTH
+    if new_start.hour < START_HOUR_OF_THE_DAY
+      new_start = new_start.change(hour: END_HOUR_OF_THE_DAY) - PERIOD_LENGTH - 1.day
+      if new_start.wday == SATURDAY or new_start.wday == SUNDAY
+        skip_days = (7 - new_start.wday) % 5
+        new_start = new_start.advance(days: -skip_days)
+      end
     end
-    new_end = new_start + @@PERIOD_LENGTH
+    new_end = new_start + PERIOD_LENGTH
     Timeslot.new(new_start, new_end)
   end
 
   def next
-    new_end = @end_time + @@PERIOD_LENGTH
-    if new_end.hour > @@END_HOUR_OF_THE_DAY
-      new_end = new_end.change(hour: @@START_HOUR_OF_THE_DAY) + @@PERIOD_LENGTH + 1.day
+    new_end = @end_time + PERIOD_LENGTH
+    if new_end.hour > END_HOUR_OF_THE_DAY
+      new_end = new_end.change(hour: START_HOUR_OF_THE_DAY) + PERIOD_LENGTH + 1.day
+      if new_end.wday == SATURDAY or new_end.wday == SUNDAY
+        skip_days = (new_end.wday + 1) % 5
+        new_end = new_end.advance(days: skip_days)
+      end
     end
-    new_start = new_end - @@PERIOD_LENGTH
+    new_start = new_end - PERIOD_LENGTH
     Timeslot.new(new_start, new_end)
-  end
-
-  def duration
-    return @end_time - @start_time
   end
 
   def hour_s
@@ -58,10 +65,10 @@ class Timeslot
   end
 
   def self.start_of_day(date)
-    date.change(hour: @@START_HOUR_OF_THE_DAY)
+    date.change(hour: START_HOUR_OF_THE_DAY)
   end
 
   def self.end_of_day(date)
-    date.change(hour: @@END_HOUR_OF_THE_DAY)
+    date.change(hour: END_HOUR_OF_THE_DAY)
   end
 end
