@@ -1,5 +1,5 @@
-<div data-role="page">
-  <h1><%= @student.name %> (<%= @student.student_id %>)</h1>
+<section data-role="page">
+  <header><h1><%= @student.name %> (<%= @student.student_id %>)</h1></header>
 
   <% @comments.each do |comment| %>
   <ul data-role="listview">
@@ -10,4 +10,4 @@
 	 </li>
   </ul>
   <% end %>
-</div>
+</section>

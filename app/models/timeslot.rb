@@ -28,16 +28,16 @@ class Timeslot
     Timeslot.new(new_start, new_end)
   end
 
+  def duration
+    return @end_time - @start_time
+  end
+
   def hour_s
     @start_time.hour.to_s + ' - ' + @end_time.hour.to_s
   end
 
   def date_s
     @start_time.strftime('%A, %d %B %Y')
-  end
-
-  def self.PERIOD_LENGTH
-    @@PERIOD_LENGTH
   end
 
   def self.now

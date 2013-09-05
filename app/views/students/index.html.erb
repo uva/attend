@@ -16,7 +16,11 @@
 		<tr>
 		  <td><%= student.name %> (<%= student.student_id %>)</td>
 		  <% @weeks.each do |week| %>
-		  <td><%= distance_of_time_in_words @student_records[student][week] %></td>
+		  <td>
+			 <% if @student_records[student][week] %>
+			 <%= distance_of_time_in_words @student_records[student][week] %>
+			 <% end %>
+		  </td>
 		  <% end %>
 		</tr>
 		<% end %>

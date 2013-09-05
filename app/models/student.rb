@@ -8,6 +8,8 @@ class Student < ActiveRecord::Base
 
   def hours_per_week
     weekly_records = records.order('start_time DESC').group_by(&:week)
-    weekly_records.each { |week, records| weekly_records[week] = Timeslot.PERIOD_LENGTH * records.count }
+    weekly_records.each do |week, records|
+      weekly_records[week] = records.inject(0) {|sum, r| sum + r.duration }
+    end
   end
 end

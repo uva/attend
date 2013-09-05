@@ -28,5 +28,6 @@ class AttendanceController < ApplicationController
       r = Record.find_by(record_params)
       r.destroy unless r.nil?
     end
+    render text: 'OK'
   end
 end

@@ -4,4 +4,8 @@ class Record < ActiveRecord::Base
   def week
     start_time.strftime('%W')
   end
+
+  def duration
+    end_time - start_time
+  end
 end

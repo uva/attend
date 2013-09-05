@@ -1,6 +1,5 @@
 Attendance::Application.routes.draw do
 
-  get "students/show"
   root 'attendance#index'
 
   get 'unauthorized' => 'users#unauthorized', as: 'unauthorized'

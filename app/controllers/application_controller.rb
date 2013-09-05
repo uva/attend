@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
   def current_user
@@ -8,14 +6,10 @@ class ApplicationController < ActionController::Base
   end
 
   def is_assistant?
-    if current_user.nil?
-      redirect_to controller: 'users', action: 'unauthorized'
-    end
+    render text: 'no assistant' if current_user.nil?
   end
 
   def is_admin?
-    if current_user.nil? || !current_user.is_admin?
-      redirect_to controller: 'users', action: 'unauthorized'
-    end
+    render text: 'no admin' if current_user.nil? || !current_user.is_admin?
   end
 end

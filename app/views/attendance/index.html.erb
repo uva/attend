@@ -1,18 +1,18 @@
-<div data-role="page" data-url="<%= request.path %>">
+<section data-role="page" data-url="<%= request.path %>">
 
   <% if flash[:notice] %>
-  <div class="ui-bar ui-bar-b"><%= flash[:notice] %></div>
+  <section class="ui-bar ui-bar-b"><%= flash[:notice] %></section>
   <% end %>
 
-  <div data-role="header">
+  <header data-role="header">
 	 <a href="<%= link_to_period(@timeslot.previous) %>"
 		 data-role="button" data-icon="arrow-l">Previous</a>
 	 <h1><%= @timeslot.hour_s %> <%= @timeslot.date_s %></h1>
 	 <a href="<%= link_to_period(@timeslot.next) %>"
 		 data-role="button" data-icon="arrow-r">Next</a>
-  </div>
+  </header>
 
-  <div data-role="content">
+  <section data-role="content">
 	 <ul data-role="listview" data-filter="true" data-inset="true">
 		<% @students.each do |student| %>
 		<li class="student-entry" data-filtertext="<%= student.id %> <%= student.name %>">
@@ -40,5 +40,5 @@
 		</li>
 		<% end %>
 	 </ul>
-  </div>
-</div>
+  </section>
+</section>
