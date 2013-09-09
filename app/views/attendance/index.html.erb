@@ -17,7 +17,7 @@
 		<% @students.each do |student| %>
 		<li class="student-entry" data-filtertext="<%= student.id %> <%= student.name %>">
 		  <strong><%= student.name %> (<%= student.student_id %>)</strong>
-		  <div class="ui-li-aside attendance-indicator">
+		  <div class="attendance-indicator">
 			 <fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
 				<label>Attending
 				  <input type="checkbox" class="attendance-toggle"
