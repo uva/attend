@@ -39,14 +39,6 @@ class Timeslot
     Timeslot.new(new_start, new_end)
   end
 
-  def hour_s
-    @start_time.hour.to_s + ' - ' + @end_time.hour.to_s
-  end
-
-  def date_s
-    @start_time.strftime('%A, %d %B %Y')
-  end
-
   def self.now
     current_time = Time.now
     Timeslot.at(current_time)

@@ -6,10 +6,19 @@
 
   <header data-role="header">
 	 <a href="<%= link_to_period(@timeslot.previous) %>"
-		 data-role="button" data-icon="arrow-l">Previous</a>
-	 <h1><%= @timeslot.hour_s %> <%= @timeslot.date_s %></h1>
+		 data-role="button" data-icon="arrow-l" data-iconpos="notext"></a>
+
+	 <h1>
+		<span class="only-large-screens">
+		  <%= format_hour @timeslot %> <%= format_date_long @timeslot %>
+		</span>
+		<span class="only-small-screens">
+		  <%= format_hour @timeslot %> <%= format_date_short @timeslot %>
+		</span>
+	 </h1>
+
 	 <a href="<%= link_to_period(@timeslot.next) %>"
-		 data-role="button" data-icon="arrow-r">Next</a>
+		 data-role="button" data-icon="arrow-r" data-iconpos="notext"></a>
   </header>
 
   <section data-role="content">
@@ -35,7 +44,7 @@
 					  data-inline="true"
 					  data-rel="dialog"
 					  >Add Comment</a>
-				  <a href="<%= url_for student_path(student) %>" data-role="button" data-icon="arrow-r" data-iconpos="notext"></a>
+				  <a href="<%= url_for student_path(student) %>" data-role="button" data-icon="bars" data-iconpos="notext"></a>
 				</fieldset>
 			 </div>
 		  </div>
