@@ -16,26 +16,28 @@
 	 <ul data-role="listview" data-filter="true" data-inset="true">
 		<% @students.each do |student| %>
 		<li class="student-entry" data-filtertext="<%= student.id %> <%= student.name %>">
-		  <strong><%= student.name %> (<%= student.student_id %>)</strong>
-		  <div class="attendance-indicator">
-			 <fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
-				<label>Attending
-				  <input type="checkbox" class="attendance-toggle"
-							data-inline="true"
-							data-student-id="<%= student.id %>"
-							data-start-time="<%= @timeslot.start_time %>"
-							data-end-time="<%= @timeslot.end_time %>"
-							<% unless student.record_at(@timeslot).nil? %>checked<% end %>>
-				</label>
-			 </fieldset>
-			 <fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
-				<a href="<%= url_for new_student_comment_path(student) %>"
-					data-role="button"
-					data-inline="true"
-					data-rel="dialog"
-					>Add Comment</a>
-				<a href="<%= url_for student_path(student) %>" data-role="button" data-icon="arrow-r" data-iconpos="notext"></a>
-			 </fieldset>
+		  <div class="ui-grid-a attendance-list-breakpoint">
+			 <div class="ui-block-a"><%= student.name %> (<%= student.student_id %>)</div>
+			 <div class="ui-block-b attendance-indicator">
+				<fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
+				  <label>Attending
+					 <input type="checkbox" class="attendance-toggle"
+							  data-inline="true"
+							  data-student-id="<%= student.id %>"
+							  data-start-time="<%= @timeslot.start_time %>"
+							  data-end-time="<%= @timeslot.end_time %>"
+							  <% unless student.record_at(@timeslot).nil? %>checked<% end %>>
+				  </label>
+				</fieldset>
+				<fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
+				  <a href="<%= url_for new_student_comment_path(student) %>"
+					  data-role="button"
+					  data-inline="true"
+					  data-rel="dialog"
+					  >Add Comment</a>
+				  <a href="<%= url_for student_path(student) %>" data-role="button" data-icon="arrow-r" data-iconpos="notext"></a>
+				</fieldset>
+			 </div>
 		  </div>
 		</li>
 		<% end %>

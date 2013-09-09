@@ -2,22 +2,33 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.student-entry
+.attendance-indicator fieldset
 {
-    height: 2.3em;
-    line-height: 2.3em;
+	 display: inline-block;
 }
 
-.attendance-indicator
+@media all and (max-width: 550px)
 {
-    position: absolute;  /* ugly, but can't get it to work as relative */
-	 top: 4px;
-    right: 6px;
-    line-height: 100%;
-	 vertical-align: middle;
+	 .attendance-list-breakpoint.ui-grid-a .ui-block-a,
+	 .attendance-list-breakpoint.ui-grid-a .ui-block-b
+	 {
+		  width: 100%;
+		  text-align: center;
+		  float: none;
+		  clear: left;
+	 }
+}
 
-    fieldset
-    {
-        display: inline-block;
-    }
+@media all and (min-width: 550px)
+{
+	 .attendance-list-breakpoint.ui-grid-a .ui-block-a
+	 {
+	 	  line-height: 38px;
+	 }
+
+	 .attendance-list-breakpoint.ui-grid-a .ui-block-b
+	 {
+		  float: right;
+		  width: auto;
+	 }
 }
