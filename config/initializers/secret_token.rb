@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Attendance::Application.config.secret_key_base = 'ede5cb3764d18db2d8a24c13b8653ec977969a13d1d278c263b2b82710ab958fe1048cb0f28bd84981101730ee322f47510de2cf53cfc68678e64620e445d7ae'
+Attendance::Application.config.secret_key_base = ENV['SECRET_TOKEN']

@@ -2,9 +2,15 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:unauthorized, :show, :edit, :update, :destroy]
 
   prepend_before_filter CASClient::Frameworks::Rails::Filter
-  before_filter :is_admin?
+  before_filter :is_admin?, except: [:claim]
 
-  def unauthorized
+  def claim
+    if User.first
+      render text: 'already claimed'
+    else
+      User.create(uvanetid: session[:cas_user], is_admin: true)
+      redirect_to :root
+    end
   end
 
   # GET /users

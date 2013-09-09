@@ -1,8 +1,7 @@
 Attendance::Application.routes.draw do
 
   root 'attendance#index'
-
-  get 'unauthorized' => 'users#unauthorized', as: 'unauthorized'
+  get 'claim' => 'users#claim'
 
   resources :students do
     resources :comments, only: [:index, :new, :create]
@@ -13,6 +12,8 @@ Attendance::Application.routes.draw do
   get 'attendance' => 'attendance#index'
   get ':date/:timeslot' => 'attendance#index'
   post 'attendance' => 'attendance#update'
+
+  get 'import' => 'students#import'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
