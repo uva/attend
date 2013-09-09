@@ -1,4 +1,10 @@
-## README
+# README
+
+## Description
+
+Keep attendance and comments about students.
+
+## Usage
 
 1. `git clone git@github.com:uva/attend.git`
 2. `bundle install`
