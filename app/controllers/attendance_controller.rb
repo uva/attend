@@ -11,10 +11,11 @@ class AttendanceController < ApplicationController
       @timeslot = Timeslot.now      
     end
 
-    @students = Student.joins("LEFT OUTER JOIN records "\
+    @students = Student.includes(:records).joins("LEFT OUTER JOIN records "\
                               "ON records.student_id = students.id "\
                               "AND records.start_time = '#{@timeslot.start_time}' "\
                               "AND records.end_time = '#{@timeslot.end_time}'")
+    @students.load
   end
 
   def update

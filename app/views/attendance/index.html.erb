@@ -35,7 +35,7 @@
 							  data-student-id="<%= student.id %>"
 							  data-start-time="<%= @timeslot.start_time %>"
 							  data-end-time="<%= @timeslot.end_time %>"
-							  <% unless student.record_at(@timeslot).nil? %>checked<% end %>>
+							  <% unless student.records.length == 0 %>checked<% end %>>
 				  </label>
 				</fieldset>
 				<fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
