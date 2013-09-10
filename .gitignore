@@ -17,3 +17,6 @@
 
 # Ignore changes to environment variables
 .env
+
+# compiled assets
+/public/assets
