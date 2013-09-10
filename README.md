@@ -9,7 +9,7 @@ Keep attendance and comments about students.
 1. `git clone git@github.com:uva/attend.git`
 2. `bundle install`
 3. `rake db:setup`
-4. update the `.env` file with the following variables:
+4. copy the `env.template` to `.env`, and edit the following variables:
    - SECRET_TOKEN (run `rake secret`)
    - IMPORT_URL
    - IMPORT_USERNAME
