@@ -1,55 +1,92 @@
-<section data-role="page" data-url="<%= request.path %>">
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="nav navbar-nav navbar-left">
 
-  <% if flash[:notice] %>
-  <section class="ui-bar ui-bar-b"><%= flash[:notice] %></section>
+    <a class="btn btn-primary navbar-btn" href="<%= link_to_period(@timeslot.previous) %>">
+      <span class="glyphicon glyphicon-backward"></span>
+    </a>
+
+    <div class="navbar-brand">
+      <span class="only-large-screens">
+        <%= format_hour @timeslot %> <%= format_date_long @timeslot %>
+      </span>
+      <span class="only-small-screens">
+        <%= format_hour @timeslot %> <%= format_date_short @timeslot %>
+      </span>
+    </div>
+    
+    <a class="btn btn-primary navbar-btn" href="<%= link_to_period(@timeslot.next) %>">
+      <span class="glyphicon glyphicon-forward"></span>
+    </a>
+    
+  </div>
+  
+  <form class="navbar-form navbar-right">
+    <div class="form-group">
+      <input class="form-control" id="filter">
+    </div>
+  </form>
+
+    
+</nav>
+  
+<% if flash[:notice] %>
+<section class="ui-bar ui-bar-b"><%= flash[:notice] %></section>
+<% end %>
+  
+<script>
+$('#filter').keyup(
+  function()
+  {
+    if(this.value == '')
+    {
+      $("#student_list li").show();
+    }
+    else
+    {
+      $("#student_list li").hide();
+      $("#student_list li[id*='"+this.value+"']").show();
+    }
+  }
+);
+
+function toggle(student, value)
+{
+  $.post('/attendance', {
+    student_id: student,
+    attending: value,
+    start_time: '<%= @timeslot.start_time %>',
+    end_time: '<%= @timeslot.end_time %>'
+  });
+}
+
+</script>
+
+<ul id="student_list" class="list-group">
+  <% @students.each do |student| %>
+  <li class="list-group-item" id="<%= student_to_tag(student) %>">
+
+    <div class="pull-right">
+      
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn <%= 'active' if not student.record_at(@timeslot).nil? %> btn-default" onclick="toggle(<%= student.id %>, true);">
+          <%= radio_button_tag student_to_tag(student), 'att', !student.record_at(@timeslot).nil? %> Attending
+        </label>
+        <label class="btn <%= 'active' if student.record_at(@timeslot).nil? %> btn-default" onclick="toggle(<%= student.id %>, false);">
+          <%= radio_button_tag student_to_tag(student), 'not', student.record_at(@timeslot).nil? %> Not
+        </label>
+      </div>
+      
+      <a href="<%= url_for new_student_comment_path(student) %>" class="btn btn-default">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </a>
+      <a href="<%= url_for student_path(student) %>" class="btn btn-default">
+        <span class="glyphicon glyphicon-list"></span>
+      </a>
+    </div>
+
+    <h4 class="list-group-item-heading"><%= student.name %></h4>
+    <p class="list-group-item-text"><%= student.student_id %></p>
+
+  </li>
   <% end %>
-
-  <header data-role="header">
-	 <a href="<%= link_to_period(@timeslot.previous) %>"
-		 data-role="button" data-icon="arrow-l" data-iconpos="notext"></a>
-
-	 <h1>
-		<span class="only-large-screens">
-		  <%= format_hour @timeslot %> <%= format_date_long @timeslot %>
-		</span>
-		<span class="only-small-screens">
-		  <%= format_hour @timeslot %> <%= format_date_short @timeslot %>
-		</span>
-	 </h1>
-
-	 <a href="<%= link_to_period(@timeslot.next) %>"
-		 data-role="button" data-icon="arrow-r" data-iconpos="notext"></a>
-  </header>
-
-  <section data-role="content">
-	 <ul data-role="listview" data-filter="true" data-inset="true">
-		<% @students.each do |student| %>
-		<li class="student-entry" data-filtertext="<%= student.id %> <%= student.name %>">
-		  <div class="ui-grid-a attendance-list-breakpoint">
-			 <div class="ui-block-a"><%= student.name %> (<%= student.student_id %>)</div>
-			 <div class="ui-block-b attendance-indicator">
-				<fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
-				  <label>Attending
-					 <input type="checkbox" class="attendance-toggle"
-							  data-inline="true"
-							  data-student-id="<%= student.id %>"
-							  data-start-time="<%= @timeslot.start_time %>"
-							  data-end-time="<%= @timeslot.end_time %>"
-							  <% unless student.records.length == 0 %>checked<% end %>>
-				  </label>
-				</fieldset>
-				<fieldset data-mini="true" data-role="controlgroup" data-type="horizontal">
-				  <a href="<%= url_for new_student_comment_path(student) %>"
-					  data-role="button"
-					  data-inline="true"
-					  data-rel="dialog"
-					  >Add Comment</a>
-				  <a href="<%= url_for student_path(student) %>" data-role="button" data-icon="bars" data-iconpos="notext"></a>
-				</fieldset>
-			 </div>
-		  </div>
-		</li>
-		<% end %>
-	 </ul>
-  </section>
-</section>
+</ul>

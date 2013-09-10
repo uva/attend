@@ -15,5 +15,9 @@ module AttendanceHelper
   def format_date_short(timeslot)
     timeslot.start_time.strftime('%a, %e-%b')
   end
+  
+  def student_to_tag(student)
+	student.id.to_s + student.name.split(" ").join("").downcase
+  end
 
 end
