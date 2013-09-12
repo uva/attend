@@ -1,14 +1,14 @@
 <nav class="navbar navbar-inverse navbar-static-top">
 
   <a class="navbar-brand" href="/">
-    <span class="only-large-screens">
+    <span class="hidden-xs">
       <%= format_hour @timeslot %> <%= format_date_long @timeslot %>
     </span>
-    <span class="only-small-screens">
+    <span class="visible-xs">
       <%= format_hour @timeslot %> <%= format_date_short @timeslot %>
     </span>
   </a>
-      
+  
   <div class="pull-right" style="margin-right:15px">
     <a class="btn btn-primary navbar-btn" href="<%= link_to_period(@timeslot.previous) %>">
       <span class="glyphicon glyphicon-backward"></span>
@@ -18,9 +18,9 @@
       <span class="glyphicon glyphicon-forward"></span>
     </a>
   </div>
-    
+  
 </nav>
-    
+
 <nav class="navbar navbar-inverse navbar-static-top">
 
   <div class="navbar-form ">
@@ -30,40 +30,40 @@
   </div>
   
 </nav>
-  
+
 <% if flash[:notice] %>
 <section class="alert alert-success alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times</button>
   <%= flash[:notice] %>
 </section>
 <% end %>
-  
+
 <script>
 
-$('#filter').keyup(
+  $('#filter').keyup(
   function()
   {
-    if(this.value == '')
-    {
-      $("#student_list li").show();
-    }
-    else
-    {
-      $("#student_list li").hide();
-      $("#student_list li[id*='"+this.value+"']").show();
-    }
+  if(this.value == '')
+  {
+  $("#student_list li").show();
   }
-);
+  else
+  {
+  $("#student_list li").hide();
+  $("#student_list li[id*='"+this.value+"']").show();
+  }
+  }
+  );
 
-function toggle(student, value)
-{
+  function toggle(student, value)
+  {
   $.post('/attendance', {
-    student_id: student,
-    attending: value,
-    start_time: '<%= @timeslot.start_time %>',
-    end_time: '<%= @timeslot.end_time %>'
+  student_id: student,
+  attending: value,
+  start_time: '<%= @timeslot.start_time %>',
+  end_time: '<%= @timeslot.end_time %>'
   });
-}
+  }
 
 </script>
 
@@ -71,28 +71,34 @@ function toggle(student, value)
   <% @students.each do |student| %>
   <li class="list-group-item" id="<%= student_to_tag(student) %>">
 
-    <div class="student-functions pull-right">
-      
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn <%= 'active' if not student.record_at(@timeslot).nil? %> btn-default" onclick="toggle(<%= student.id %>, true);">
-          <%= radio_button_tag student_to_tag(student), 'att', !student.record_at(@timeslot).nil? %> Attending
-        </label>
-        <label class="btn <%= 'active' if student.record_at(@timeslot).nil? %> btn-default" onclick="toggle(<%= student.id %>, false);">
-          <%= radio_button_tag student_to_tag(student), 'not', student.record_at(@timeslot).nil? %> Not
-        </label>
-      </div>
-      
-      <a href="<%= url_for new_student_comment_path(student) %>" class="btn btn-default">
-        <span class="glyphicon glyphicon-pencil"></span>
-      </a>
-      <a href="<%= url_for student_path(student) %>" class="btn btn-default">
-        <span class="glyphicon glyphicon-list"></span>
-      </a>
-      
-    </div>
+	 <div class="row student-entry">
+		<div class="col-sm-8">
+		  <h4 class="list-group-item-heading"><%= student.name %></h4>
+		</div>
 
-    <h4 class="list-group-item-heading"><%= student.name %></h4>
+		<div class="col-sm-4">
+		  <div class="student-functions">
 
+			 <div class="btn-group" data-toggle="buttons">
+				<label class="btn <%= 'active' if not student.record_at(@timeslot).nil? %> btn-default" onclick="toggle(<%= student.id %>, true);">
+				  <%= radio_button_tag student_to_tag(student), 'att', !student.record_at(@timeslot).nil? %> Attending
+				</label>
+				<label class="btn <%= 'active' if student.record_at(@timeslot).nil? %> btn-default" onclick="toggle(<%= student.id %>, false);">
+				  <%= radio_button_tag student_to_tag(student), 'not', student.record_at(@timeslot).nil? %> Not
+				</label>
+			 </div>
+			 
+			 <a href="<%= url_for new_student_comment_path(student) %>" class="btn btn-default">
+				<span class="glyphicon glyphicon-pencil"></span>
+			 </a>
+			 <a href="<%= url_for student_path(student) %>" class="btn btn-default">
+				<span class="glyphicon glyphicon-list"></span>
+			 </a>
+			 
+		  </div>
+		</div>
+	 </div>
+    
   </li>
   <% end %>
 </ul>
