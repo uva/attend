@@ -67,6 +67,11 @@
 	display:block !important;
 }
 
+.list-group-item
+{
+	min-height:55px;
+}
+
 @media (max-width: 767px)
 {
 	.navbar-form
@@ -77,5 +82,10 @@
 	.navbar-form .form-group
 	{
 		margin-bottom:0 !important;
+	}
+	
+	.student-functions
+	{
+		clear:both;
 	}
 }

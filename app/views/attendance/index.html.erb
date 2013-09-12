@@ -68,7 +68,7 @@ function toggle(student, value)
   <% @students.each do |student| %>
   <li class="list-group-item" id="<%= student_to_tag(student) %>">
 
-    <div class="pull-right">
+    <div class="student-functions pull-right">
       
       <div class="btn-group" data-toggle="buttons">
         <label class="btn <%= 'active' if not student.record_at(@timeslot).nil? %> btn-default" onclick="toggle(<%= student.id %>, true);">
@@ -85,10 +85,10 @@ function toggle(student, value)
       <a href="<%= url_for student_path(student) %>" class="btn btn-default">
         <span class="glyphicon glyphicon-list"></span>
       </a>
+      
     </div>
 
     <h4 class="list-group-item-heading"><%= student.name %></h4>
-    <p class="list-group-item-text"><%= student.student_id %></p>
 
   </li>
   <% end %>
