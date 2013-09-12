@@ -5,48 +5,77 @@
 /* reduce the margin on the sides of the title, no need with icon-only buttons */
 .ui-header .ui-title
 {
-	 margin-left: 20%;
-	 margin-right: 20%;
+	margin-left: 20%;
+	margin-right: 20%;
 }
 
 .attendance-indicator fieldset
 {
-	 display: inline-block;
+	display: inline-block;
 }
 
 @media all and (max-width: 550px) /* small screens */
 {
-	 .only-large-screens { display: none }
-	 .only-small-screens { display: inline }
+	.only-large-screens { display: none }
+	.only-small-screens { display: inline }
 
-	 .attendance-list-breakpoint.ui-grid-a .ui-block-a,
-	 .attendance-list-breakpoint.ui-grid-a .ui-block-b
-	 {
-		  width: 100%;
-		  text-align: center;
-		  float: none;
-		  clear: left;
-	 }
+	.attendance-list-breakpoint.ui-grid-a .ui-block-a,
+	.attendance-list-breakpoint.ui-grid-a .ui-block-b
+	{
+		width: 100%;
+		text-align: center;
+		float: none;
+		clear: left;
+	}
 }
 
 @media all and (min-width: 550px) /* large screens */
 {
-	 .only-large-screens { display: inline }
-	 .only-small-screens { display: none }
+	.only-large-screens { display: inline }
+	.only-small-screens { display: none }
 
-	 .attendance-list-breakpoint.ui-grid-a .ui-block-a
-	 {
-	 	  line-height: 38px;
-	 }
+	.attendance-list-breakpoint.ui-grid-a .ui-block-a
+	{
+		line-height: 38px;
+	}
 
-	 .attendance-list-breakpoint.ui-grid-a .ui-block-b
-	 {
-		  float: right;
-		  width: auto;
-	 }
+	.attendance-list-breakpoint.ui-grid-a .ui-block-b
+	{
+		float: right;
+		width: auto;
+	}
 }
 
 .navbar
 {
 	margin-bottom:0 !important;
+}
+
+.navbar .navbar-text
+{
+/*	float:none;*/
+}
+
+.navbar .btn
+{
+	smargin-left:15px;
+	smargin-right:5px;
+}
+
+.navbar .form-group, .navbar input
+{
+	display:block !important;
+}
+
+@media (max-width: 767px)
+{
+	.navbar-form
+	{
+		margin:0 !important;
+	}
+
+	.navbar-form .form-group
+	{
+		margin-bottom:0 !important;
+	}
 }

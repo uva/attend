@@ -1,32 +1,34 @@
 <nav class="navbar navbar-inverse navbar-static-top">
-  <div class="nav navbar-nav navbar-left">
 
+  <a class="navbar-brand" href="/">
+    <span class="only-large-screens">
+      <%= format_hour @timeslot %> <%= format_date_long @timeslot %>
+    </span>
+    <span class="only-small-screens">
+      <%= format_hour @timeslot %> <%= format_date_short @timeslot %>
+    </span>
+  </a>
+      
+  <div class="pull-right" style="margin-right:15px">
     <a class="btn btn-primary navbar-btn" href="<%= link_to_period(@timeslot.previous) %>">
       <span class="glyphicon glyphicon-backward"></span>
     </a>
 
-    <div class="navbar-brand">
-      <span class="only-large-screens">
-        <%= format_hour @timeslot %> <%= format_date_long @timeslot %>
-      </span>
-      <span class="only-small-screens">
-        <%= format_hour @timeslot %> <%= format_date_short @timeslot %>
-      </span>
-    </div>
-    
     <a class="btn btn-primary navbar-btn" href="<%= link_to_period(@timeslot.next) %>">
       <span class="glyphicon glyphicon-forward"></span>
     </a>
-    
   </div>
-  
-  <form class="navbar-form navbar-right">
+    
+</nav>
+    
+<nav class="navbar navbar-inverse navbar-static-top">
+
+  <form class="navbar-form ">
     <div class="form-group">
       <input class="form-control" id="filter">
     </div>
   </form>
-
-    
+  
 </nav>
   
 <% if flash[:notice] %>
