@@ -40,30 +40,36 @@
 
 <script>
 
-  $('#filter').keyup(
-  function()
+$('#filter').keyup(
+  function(event)
   {
-  if(this.value == '')
-  {
-  $("#student_list li").show();
-  }
-  else
-  {
-  $("#student_list li").hide();
-  $("#student_list li[id*='"+this.value+"']").show();
-  }
-  }
-  );
+    if(this.value == '')
+    {
+      $("#student_list li").show();
+    }
+    else
+    {
+      $("#student_list li").hide();
+      $("#student_list li[id*='"+this.value+"']").show();
+    }
 
-  function toggle(student, value)
-  {
-  $.post('/attendance', {
-  student_id: student,
-  attending: value,
-  start_time: '<%= @timeslot.start_time %>',
-  end_time: '<%= @timeslot.end_time %>'
-  });
+    if(event.which == 13) // enter pressed
+    {
+      alert('huh');
+      $(this).blur();
+    }
   }
+);
+
+function toggle(student, value)
+{
+  $.post('/attendance', {
+    student_id: student,
+    attending: value,
+    start_time: '<%= @timeslot.start_time %>',
+    end_time: '<%= @timeslot.end_time %>'
+  });
+}
 
 </script>
 
