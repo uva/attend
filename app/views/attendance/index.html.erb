@@ -43,17 +43,20 @@
 $('#filter').keyup(
   function(event)
   {
+    // empty filter, show all
     if(this.value == '')
     {
       $("#student_list li").show();
     }
+    // otherwise filter on substring
     else
     {
       $("#student_list li").hide();
       $("#student_list li[id*='"+this.value+"']").show();
     }
 
-    if(event.which == 13) // enter pressed
+    // unfocus input field on pressing enter, handy on phones
+    if(event.which == 13)
     {
       $(this).blur();
     }
