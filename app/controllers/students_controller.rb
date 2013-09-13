@@ -23,11 +23,9 @@ class StudentsController < ApplicationController
     students = JSON.parse(open(ENV['IMPORT_URL'], http_basic_authentication: authentication).read)
 
     students.each do |student|
-      if student['student_id'].to_i > 0
-        record = Student.find_or_create_by(student_id: student['student_id'])
-        record.name = student['name']
-        record.save
-      end
+      record = Student.find_or_create_by(student_id: student['student_id'])
+      record.name = student['name']
+      record.save
     end
 
     redirect_to :root
