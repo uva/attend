@@ -45,9 +45,11 @@ class Timeslot
   end
 
   def self.at(datetime)
-    # clip start and end to 9:00 -- 17:00
-    start_hour = [[(datetime.hour + 1) / 2 * 2 - 1, 9].max, 15].min
-    end_hour = [[(datetime.hour + 1) / 2 * 2 + 1, 11].max, 17].min
+    # clip start and end to START-- and END_HOUR_OF_THE_DAY
+    start_hour = [[(datetime.hour + 1) / 2 * 2 - 1, START_HOUR_OF_THE_DAY].max,
+                  END_HOUR_OF_THE_DAY - 2].min
+    end_hour = [[(datetime.hour + 1) / 2 * 2 + 1, START_HOUR_OF_THE_DAY + 2].max,
+                END_HOUR_OF_THE_DAY].min
     Timeslot.new(datetime.change(hour: start_hour), datetime.change(hour: end_hour))
   end
 
