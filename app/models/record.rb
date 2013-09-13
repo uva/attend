@@ -2,7 +2,7 @@ class Record < ActiveRecord::Base
   belongs_to :student
 
   def week
-    start_time.strftime('%W')
+    start_time.strftime('%V')
   end
 
   def duration

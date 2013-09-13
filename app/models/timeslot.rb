@@ -1,4 +1,5 @@
 class Timeslot
+  include Comparable
   attr_reader :start_time, :end_time
 
   SATURDAY = 6
@@ -39,11 +40,27 @@ class Timeslot
     Timeslot.new(new_start, new_end)
   end
 
+  def <=>(other)
+    if @start_time < other.start_time
+      return -1
+    elsif @start_time > other.start_time
+      return 1
+    else
+      return 0
+    end
+  end
+
+  alias eql? ==
+
+  def hash
+    [@start_time, @end_time].hash
+  end
+
   def self.now
     current_time = Time.now
     Timeslot.at(current_time)
   end
-
+  
   def self.at(datetime)
     # clip start and end to START-- and END_HOUR_OF_THE_DAY
     start_hour = [[(datetime.hour + 1) / 2 * 2 - 1, START_HOUR_OF_THE_DAY].max,

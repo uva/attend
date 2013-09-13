@@ -1,0 +1,25 @@
+<h1>Overview per week</h1>
+
+<% @timeslots_per_week.each do |week, records_per_timeslot| %>
+<h2>Week <%= week %></h2>
+<% if records_per_timeslot.size == 0 %>
+<p>No students</p>
+<% else %>
+<table class="table table-striped">
+  <thead>
+	 <tr>
+		<th>Date</th>
+		<th>Attending</th>
+	 </tr>
+  </thead>
+  <tbody>
+	 <% records_per_timeslot.each do |timeslot, records| %>
+	 <tr>
+		<td><%= format_date_long timeslot %> <%= format_hour timeslot %></td>
+		<td><%= records %></td>
+	 </tr>
+	 <% end %>
+  </tbody>
+</table>
+<% end %>
+<% end %>
