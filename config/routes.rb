@@ -6,6 +6,7 @@ Attendance::Application.routes.draw do
   resources :students do
     resources :comments, only: [:index, :new, :create]
   end
+  get 'comments' => 'comments#feed'
 
   resources :users
 

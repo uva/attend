@@ -1,5 +1,5 @@
 <header>
-  <h1><%= @student.name %> (<%= @student.student_id %>)</h1>
+  <h1>Comments feed</h1>
 </header>
 
 <section>
@@ -12,6 +12,9 @@
 
 		<a href="<%= url_for new_student_comment_path(comment.student) %>" class="btn btn-default">
 		  <span class="glyphicon glyphicon-pencil"></span> Add comment
+		</a>
+		<a href="<%= url_for student_path(comment.student) %>" class="btn btn-default">
+		  <span class="glyphicon glyphicon-list"></span> All comments
 		</a>
 	 </li>
 	 <% end %>

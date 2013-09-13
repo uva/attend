@@ -29,6 +29,10 @@ class CommentsController < ApplicationController
     @comments = @student.comments.includes(:author)
   end
 
+  def feed
+    @comments = Comment.all
+  end
+
   private
     def set_student
       @student = Student.find_by(id: params[:student_id])
