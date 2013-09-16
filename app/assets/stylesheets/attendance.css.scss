@@ -58,3 +58,32 @@
 		  float: right;
 	 }
 }
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+/* charts */
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+  fill-opacity: .9;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.grid .tick {
+	 stroke: lightgrey;
+}
+
+.grid path {
+	 stroke-width: 0;
+}

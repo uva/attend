@@ -1,25 +1,17 @@
 <h1>Overview per week</h1>
 
 <% @timeslots_per_week.each do |week, records_per_timeslot| %>
+
 <h2>Week <%= week %></h2>
-<% if records_per_timeslot.size == 0 %>
-<p>No students</p>
-<% else %>
-<table class="table table-striped">
-  <thead>
-	 <tr>
-		<th>Date</th>
-		<th>Attending</th>
-	 </tr>
-  </thead>
-  <tbody>
-	 <% records_per_timeslot.each do |timeslot, records| %>
-	 <tr>
-		<td><%= format_date_long timeslot %> <%= format_hour timeslot %></td>
-		<td><%= records %></td>
-	 </tr>
-	 <% end %>
-  </tbody>
-</table>
-<% end %>
+
+<% canvas_id = "canvas-" + week.to_s %>
+<div id="<%= canvas_id %>"></div>
+<script>
+  var attendance_data = {
+  <% records_per_timeslot.each do |timeslot, records| %>
+  "<%= timeslot.start_time.strftime('%a ') + format_hours(timeslot, separator='-')  %>": <%= records %>,
+  <% end %>
+  };
+  draw_bar_chart_on("#<%= canvas_id %>", attendance_data);
+</script>
 <% end %>
