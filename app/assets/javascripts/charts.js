@@ -3,7 +3,7 @@ function draw_bar_chart_on(element_id, attendance_data)
 	var timeslots = ["9-11", "11-13", "13-15", "15-17", "17-19"];
 	var weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 	var timeslots_during_week = weekdays.map(function(day) {
-		return timeslots.map(function(slot) { return day + " " + slot });
+		return timeslots.map(function(slot) { return day + " " + slot; });
 	});
 
 	var max_students = 0;
@@ -11,7 +11,7 @@ function draw_bar_chart_on(element_id, attendance_data)
 		return timeslots.map(function(timeslot) {
 			var students = 0;
 			if (attendance_data[timeslot] != undefined) {
-				students = attendance_data[timeslot]
+				students = attendance_data[timeslot];
 			}
 			if (students > max_students) {
 				max_students = students;
@@ -71,7 +71,7 @@ function draw_bar_chart_on(element_id, attendance_data)
       .attr("class", "grid")
       .call(yAxis
             .tickSize(-width, 0, 0)
-            .tickFormat(""))
+            .tickFormat(""));
 
 	var slots = days.selectAll("rect")
       .data(function(d) { return d; })
@@ -87,13 +87,13 @@ function draw_bar_chart_on(element_id, attendance_data)
       .attr("transform", function(d, i) { return "translate(0," + height + ")"; })
       .each(function(d, i) {
 			var scale = d3.scale.ordinal()
-				.domain(d.map(function(slot) { return slot.timeslot }))
+				.domain(d.map(function(slot) { return slot.timeslot; }))
 				.rangeRoundBands([0, xDays.rangeBand()]);
 
 			var xAxis = d3.svg.axis()
 				.scale(scale)
 				.orient("bottom");
 			
-			d3.select(this).call(xAxis)
+			d3.select(this).call(xAxis);
       });
 }
