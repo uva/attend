@@ -34,7 +34,7 @@ class AttendanceController < ApplicationController
 
   def overview_per_week
     current_week = Time.now.strftime('%V').to_i
-    @timeslots_per_week = (36..current_week).inject({}) {|result, week_number|
+    @timeslots_per_week = current_week.downto(36).inject({}) {|result, week_number|
       result[week_number] = records_per_timeslot_for_week(week_number)
       result
     }
